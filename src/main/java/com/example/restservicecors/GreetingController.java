@@ -1,3 +1,4 @@
+
 package com.example.restservicecors;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -15,15 +16,21 @@ public class GreetingController {
 
 	@CrossOrigin(origins = "http://localhost:9000")
 	@GetMapping("/greeting")
-	public Greeting greeting(@RequestParam(required=false, defaultValue="World") String name) {
-		System.out.println("==== in greeting ====");
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+	public Greeting greeting(@RequestParam(required = false, defaultValue = "World") String name) {
+		long newCounter = counter.incrementAndGet();
+
+		System.out.println("== greeting| counter = " + newCounter);
+
+		return new Greeting(newCounter, String.format(template, name));
 	}
 
 	@GetMapping("/greeting-javaconfig")
-	public Greeting greetingWithJavaconfig(@RequestParam(required=false, defaultValue="World") String name) {
-		System.out.println("==== in greeting ====");
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+	public Greeting greetingWithJavaconfig(@RequestParam(required = false, defaultValue = "World") String name) {
+		long newCounter = counter.incrementAndGet();
+
+		System.out.println("== greeting-javaconfig| counter = " + newCounter);
+
+		return new Greeting(newCounter, String.format(template, name));
 	}
 
 }
